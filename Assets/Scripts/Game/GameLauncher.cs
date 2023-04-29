@@ -1,6 +1,7 @@
 ﻿using DotEngine.Core;
-using DotEngine.Core.Updater;
 using DotEngine.Frame;
+using Game.Init;
+using Game.Startup;
 using UnityEngine;
 
 namespace Game
@@ -12,18 +13,13 @@ namespace Game
             DontDestroyHelper.Create();
             DontDestroyHelper.AddGameObject(gameObject);
 
-            Facade.CreateInstance(() => new GameFacade());
-            UpdateProxy.Register(OnUpdate);
-        }
-
-        private void OnUpdate(float deltaTime, float unscaleDeltaTime)
-        {
-            Facade.GetInstance().Update(deltaTime, unscaleDeltaTime);
+            var facade = Facade.CreateInstance(() => new GameFacade());
+            facade.systemCenter.ActivateGroup(InitSystemGroup.NAME);
+            facade.systemCenter.ActivateGroup(StartupSystemGroup.NAME);
         }
 
         private void OnDestroy()
         {
-            UpdateProxy.Unregister(OnUpdate);
             Facade.DestroyInstance();
             DontDestroyHelper.Destroy();
         }

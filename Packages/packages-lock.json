@@ -1,5 +1,59 @@
 {
   "dependencies": {
+    "com.dot.bl": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-behaviourline/Assets/Dot.BehaviourLine",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.core": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-core/Assets/Dot.Core",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.events": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-events/Assets/Dot.Events",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.frame": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.Frame",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.gopool": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-gameobjectpool/Assets/Dot.GameObjectPool",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.injection": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-injection/Assets/Dot.Injection",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.log": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-log/Assets/Dot.Log",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.timer": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-timer/Assets/Dot.Timer",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.uiframe": {
+      "version": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.UIFrame",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "2.0.0",
       "depth": 0,

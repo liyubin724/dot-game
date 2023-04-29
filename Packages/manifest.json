@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.dot.bl": "file:D:/WorkSpace/dot-libs/dot-behaviourline/Assets/Dot.BehaviourLine",
+    "com.dot.core": "file:D:/WorkSpace/dot-libs/dot-core/Assets/Dot.Core",
+    "com.dot.events": "file:D:/WorkSpace/dot-libs/dot-events/Assets/Dot.Events",
+    "com.dot.frame": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.Frame",
+    "com.dot.gopool": "file:D:/WorkSpace/dot-libs/dot-gameobjectpool/Assets/Dot.GameObjectPool",
+    "com.dot.injection": "file:D:/WorkSpace/dot-libs/dot-injection/Assets/Dot.Injection",
+    "com.dot.log": "file:D:/WorkSpace/dot-libs/dot-log/Assets/Dot.Log",
+    "com.dot.timer": "file:D:/WorkSpace/dot-libs/dot-timer/Assets/Dot.Timer",
+    "com.dot.uiframe": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.UIFrame",
     "com.unity.collab-proxy": "2.0.0",
     "com.unity.feature.development": "1.0.2",
     "com.unity.textmeshpro": "3.0.6",

@@ -1,6 +1,5 @@
 ﻿using DotEngine.Core.Updater;
 using DotEngine.Frame;
-using Game.Init;
 using Game.Servicers;
 using Game.Startup;
 

@@ -14,8 +14,7 @@ namespace Game
             DontDestroyHelper.AddGameObject(gameObject);
 
             var facade = Facade.CreateInstance(() => new GameFacade());
-            facade.systemCenter.ActivateGroup(InitSystemGroup.NAME);
-            facade.systemCenter.ActivateGroup(StartupSystemGroup.NAME);
+
         }
 
         private void OnDestroy()

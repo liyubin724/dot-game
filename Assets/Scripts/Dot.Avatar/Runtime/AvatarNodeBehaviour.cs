@@ -6,30 +6,36 @@ namespace DotEngine.Avatar
 {
     public enum AvatarNodeType
     {
-        BindNode = 0,
+        None = 0,
+        BindNode,
         BoneNode,
         RendererNode,
     }
 
     [Serializable]
-    public class AvatarNodeInfo
+    public class AvatarNodeData
     {
         public string atlasName;
-        public AvatarNodeType nodeType = AvatarNodeType.BindNode;
+        public AvatarNodeType nodeType = AvatarNodeType.None;
         public Transform transform;
         public Renderer renderer;
     }
 
-    public class AvatarNodeBehaviour : MonoBehaviour, ISerializationCallbackReceiver
+    public class AvatarNodeBehaviour : MonoBehaviour
     {
-        public AvatarNodeInfo[] boneNodes = new AvatarNodeInfo[0];
-        public AvatarNodeInfo[] bindNodes = new AvatarNodeInfo[0];
-        public AvatarNodeInfo[] rendererNodes = new AvatarNodeInfo[0];
+        public List<AvatarNodeData> boneNodes = new List<AvatarNodeData>();
+        public List<AvatarNodeData> bindNodes = new List<AvatarNodeData>();
+        public List<AvatarNodeData> rendererNodes = new List<AvatarNodeData>();
 
-        private Dictionary<AvatarNodeType, Dictionary<string, AvatarNodeInfo>> m_NodeDic = new Dictionary<AvatarNodeType, Dictionary<string, AvatarNodeInfo>>();
+        private Dictionary<AvatarNodeType, Dictionary<string, AvatarNodeData>> m_NodeDic = null;
 
-        public AvatarNodeInfo GetNode(AvatarNodeType type, string name)
+        public AvatarNodeData GetNode(AvatarNodeType type, string name)
         {
+            if (m_NodeDic == null)
+            {
+                InitNodes();
+            }
+
             if (m_NodeDic.TryGetValue(type, out var nodeDic))
             {
                 if (nodeDic.TryGetValue(name, out var node))
@@ -41,17 +47,17 @@ namespace DotEngine.Avatar
             return null;
         }
 
-        public AvatarNodeInfo GetBoneNode(string name)
+        public AvatarNodeData GetBoneNode(string name)
         {
             return GetNode(AvatarNodeType.BoneNode, name);
         }
 
-        public AvatarNodeInfo GetBindNode(string name)
+        public AvatarNodeData GetBindNode(string name)
         {
             return GetNode(AvatarNodeType.BindNode, name);
         }
 
-        public AvatarNodeInfo GetRendererNode(string name)
+        public AvatarNodeData GetRendererNode(string name)
         {
             return GetNode(AvatarNodeType.RendererNode, name);
         }
@@ -71,33 +77,30 @@ namespace DotEngine.Avatar
             return transforms;
         }
 
-        public void OnAfterDeserialize()
+        private void InitNodes()
         {
-            var nodeDic = new Dictionary<string, AvatarNodeInfo>();
+            m_NodeDic = new Dictionary<AvatarNodeType, Dictionary<string, AvatarNodeData>>();
+
+            var nodeDic = new Dictionary<string, AvatarNodeData>();
             m_NodeDic.Add(AvatarNodeType.BoneNode, nodeDic);
             foreach (var node in boneNodes)
             {
                 nodeDic.Add(node.atlasName, node);
             }
 
-            nodeDic = new Dictionary<string, AvatarNodeInfo>();
+            nodeDic = new Dictionary<string, AvatarNodeData>();
             m_NodeDic.Add(AvatarNodeType.BindNode, nodeDic);
             foreach (var node in bindNodes)
             {
                 nodeDic.Add(node.atlasName, node);
             }
 
-            nodeDic = new Dictionary<string, AvatarNodeInfo>();
+            nodeDic = new Dictionary<string, AvatarNodeData>();
             m_NodeDic.Add(AvatarNodeType.RendererNode, nodeDic);
             foreach (var node in rendererNodes)
             {
                 nodeDic.Add(node.atlasName, node);
             }
-        }
-
-        public void OnBeforeSerialize()
-        {
-
         }
     }
 

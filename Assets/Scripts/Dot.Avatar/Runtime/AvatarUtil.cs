@@ -37,8 +37,8 @@ namespace DotEngine.Avatar
 
             for (int i = 0; i < partInfo.rendererDatas.Length; i++)
             {
-                var rendererInfo = partInfo.rendererDatas[i];
-                var rendererNode = nodeBehaviour.GetRendererNode(rendererInfo.nodeName);
+                var rendererData = partInfo.rendererDatas[i];
+                var rendererNode = nodeBehaviour.GetRendererNode(rendererData.nodeName);
                 if (rendererNode == null)
                 {
                     throw new Exception();
@@ -52,19 +52,19 @@ namespace DotEngine.Avatar
 
                 if (renderer is MeshRenderer meshRenderer)
                 {
-                    meshRenderer.sharedMaterials = rendererInfo.materialAssets;
+                    meshRenderer.sharedMaterials = rendererData.materialAssets;
                     if (renderer.TryGetComponent<MeshFilter>(out var meshFilter))
                     {
-                        meshFilter.sharedMesh = rendererInfo.meshAsset;
+                        meshFilter.sharedMesh = rendererData.meshAsset;
                     }
                 }
                 else if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
                 {
-                    skinnedMeshRenderer.sharedMaterials = rendererInfo.materialAssets;
-                    skinnedMeshRenderer.sharedMesh = rendererInfo.meshAsset;
+                    skinnedMeshRenderer.sharedMaterials = rendererData.materialAssets;
+                    skinnedMeshRenderer.sharedMesh = rendererData.meshAsset;
 
-                    skinnedMeshRenderer.rootBone = nodeBehaviour.GetBoneNode(rendererInfo.rootBoneNodeName)?.transform;
-                    skinnedMeshRenderer.bones = nodeBehaviour.GetBones(rendererInfo.boneNodeNames);
+                    skinnedMeshRenderer.rootBone = nodeBehaviour.GetBoneNode(rendererData.rootBoneNodeName)?.transform;
+                    skinnedMeshRenderer.bones = nodeBehaviour.GetBones(rendererData.boneNodeNames);
                 }
 
                 partInstance.rendererInstances[i] = renderer;

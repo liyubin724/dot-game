@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DotEngine.Avatar
@@ -20,10 +21,11 @@ namespace DotEngine.Avatar
         public Material[] materialAssets = new Material[0];
     }
 
+    [CreateAssetMenu(fileName = "ttt", menuName = "Create/Avatar Part Data")]
     public class AvatarPartData : ScriptableObject
     {
         public string category;
-        public AvatarRendererPartData[] rendererDatas = new AvatarRendererPartData[0];
-        public AvatarPrefabPartData[] prefabDatas = new AvatarPrefabPartData[0];
+        public List<AvatarRendererPartData> rendererDatas = new List<AvatarRendererPartData>();
+        public List<AvatarPrefabPartData> prefabDatas = new List<AvatarPrefabPartData>();
     }
 }

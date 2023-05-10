@@ -12,10 +12,10 @@ namespace DotEngine.Avatar
 
             var partInstance = new AvatarPartInstance();
             partInstance.category = partInfo.category;
-            partInstance.rendererInstances = new Renderer[partInfo.rendererDatas.Length];
+            partInstance.rendererInstances = new Renderer[partInfo.rendererDatas.Count];
 
-            partInstance.prefabInstances = new GameObject[partInfo.prefabDatas.Length];
-            for (int i = 0; i < partInfo.prefabDatas.Length; i++)
+            partInstance.prefabInstances = new GameObject[partInfo.prefabDatas.Count];
+            for (int i = 0; i < partInfo.prefabDatas.Count; i++)
             {
                 var prefabData = partInfo.prefabDatas[i];
                 var bindNode = nodeBehaviour.GetBindNode(prefabData.nodeName);
@@ -35,7 +35,7 @@ namespace DotEngine.Avatar
                 prefabInstance.transform.SetParent(bindNode.transform, false);
             }
 
-            for (int i = 0; i < partInfo.rendererDatas.Length; i++)
+            for (int i = 0; i < partInfo.rendererDatas.Count; i++)
             {
                 var rendererData = partInfo.rendererDatas[i];
                 var rendererNode = nodeBehaviour.GetRendererNode(rendererData.nodeName);

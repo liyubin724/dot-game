@@ -182,6 +182,8 @@ namespace DotEditor.Avatar
         private ListView CreateNodeListView(string headerTitle, AvatarNodeType nodeType, List<AvatarNodeData> datas, bool showRenderer = false)
         {
             var listView = new ListView();
+            listView.itemsSource = datas;
+
             listView.headerTitle = headerTitle;
             listView.showFoldoutHeader = true;
 
@@ -208,19 +210,18 @@ namespace DotEditor.Avatar
                 listItem.nodeElement.value = nodeData;
                 listItem.nodeElement.showRenderField = showRenderer;
             };
-            //listView.itemsAdded += (indexes) =>
-            //{
-            //    foreach (var index in indexes)
-            //    {
-            //        datas[index] = new AvatarNodeData
-            //        {
-            //            nodeType = nodeType,
-            //            //atlasName = $"{nodeType}-{index}"
-            //        };
-            //    }
-            //};
-
-            listView.itemsSource = datas;
+            listView.itemsAdded += (indexes) =>
+            {
+                foreach (var index in indexes)
+                {
+                    if (datas[index] == null)
+                    {
+                        datas[index] = new AvatarNodeData();
+                    }
+                    datas[index].nodeType = nodeType;
+                    datas[index].atlasName = $"{nodeType}-{index}";
+                }
+            };
 
             return listView;
         }

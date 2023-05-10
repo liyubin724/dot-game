@@ -6,36 +6,38 @@ namespace DotEngine.Avatar
 {
     public static class AvatarUtil
     {
-        public static AvatarPartInstance AssemblePart(AvatarNodeBehaviour nodeBehaviour, AvatarPartInfo partInfo)
+        public static AvatarPartInstance AssemblePart(AvatarNodeBehaviour nodeBehaviour, AvatarPartData partInfo)
         {
             if (nodeBehaviour == null || partInfo == null) return null;
 
             var partInstance = new AvatarPartInstance();
             partInstance.category = partInfo.category;
-            partInstance.rendererInstances = new Renderer[partInfo.rendererInfos.Length];
+            partInstance.rendererInstances = new Renderer[partInfo.rendererDatas.Length];
 
-            partInstance.prefabInstances = new GameObject[partInfo.prefabInfos.Length];
-            for (int i = 0; i < partInfo.prefabInfos.Length; i++)
+            partInstance.prefabInstances = new GameObject[partInfo.prefabDatas.Length];
+            for (int i = 0; i < partInfo.prefabDatas.Length; i++)
             {
-                var prefabInfo = partInfo.prefabInfos[i];
-                var bindNode = nodeBehaviour.GetBindNode(prefabInfo.nodeName);
+                var prefabData = partInfo.prefabDatas[i];
+                var bindNode = nodeBehaviour.GetBindNode(prefabData.nodeName);
                 if (bindNode != null)
                 {
-                    throw new Exception("The node is not found");
+                    throw new Exception($"The node({prefabData.nodeName}) is not found");
                 }
 
-                if (prefabInfo.prefabAsset == null)
+                if (prefabData.prefabAsset == null)
                 {
-                    throw new Exception("the asset is null");
+                    throw new Exception("the asset of prefab is null");
                 }
 
-                var prefabInstance = UnityObject.Instantiate(prefabInfo.prefabAsset);
+                var prefabInstance = UnityObject.Instantiate(prefabData.prefabAsset);
                 partInstance.prefabInstances[i] = prefabInstance;
+
+                prefabInstance.transform.SetParent(bindNode.transform, false);
             }
 
-            for (int i = 0; i < partInfo.rendererInfos.Length; i++)
+            for (int i = 0; i < partInfo.rendererDatas.Length; i++)
             {
-                var rendererInfo = partInfo.rendererInfos[i];
+                var rendererInfo = partInfo.rendererDatas[i];
                 var rendererNode = nodeBehaviour.GetRendererNode(rendererInfo.nodeName);
                 if (rendererNode == null)
                 {

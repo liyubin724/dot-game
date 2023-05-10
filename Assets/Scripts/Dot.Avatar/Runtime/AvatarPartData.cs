@@ -4,14 +4,14 @@ using UnityEngine;
 namespace DotEngine.Avatar
 {
     [Serializable]
-    public class AvatarPrefabPartInfo
+    public class AvatarPrefabPartData
     {
         public string nodeName;
         public GameObject prefabAsset;
     }
 
     [Serializable]
-    public class AvatarRendererPartInfo
+    public class AvatarRendererPartData
     {
         public string nodeName;
         public string rootBoneNodeName;
@@ -20,10 +20,10 @@ namespace DotEngine.Avatar
         public Material[] materialAssets = new Material[0];
     }
 
-    public class AvatarPartInfo : ScriptableObject
+    public class AvatarPartData : ScriptableObject
     {
         public string category;
-        public AvatarRendererPartInfo[] rendererInfos = new AvatarRendererPartInfo[0];
-        public AvatarPrefabPartInfo[] prefabInfos = new AvatarPrefabPartInfo[0];
+        public AvatarRendererPartData[] rendererDatas = new AvatarRendererPartData[0];
+        public AvatarPrefabPartData[] prefabDatas = new AvatarPrefabPartData[0];
     }
 }

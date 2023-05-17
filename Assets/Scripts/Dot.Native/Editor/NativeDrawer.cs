@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.UIElements;
 
 namespace DotEditor.Native
@@ -13,7 +9,7 @@ namespace DotEditor.Native
         public Type dataType => data?.GetType();
 
         protected NativeContext context;
-        protected VisualElement rootView;
+        protected VisualElement containerView;
 
         public NativeDrawer(object data)
         {
@@ -22,10 +18,19 @@ namespace DotEditor.Native
             this.data = data;
         }
 
-        public virtual void CreateGUI(VisualElement visualElement)
+        public void CreateGUI(VisualElement visualElement)
         {
-            context.rootView = visualElement;
-            rootView = visualElement;
+            containerView = new VisualElement();
+            containerView.name = "object-drawer-container";
+            visualElement.Add(containerView);
+
+            context.containerElements.Push(containerView);
+            {
+                OnCreateGUI();
+            }
+            context.containerElements.Pop();
         }
+
+        protected abstract void OnCreateGUI();
     }
 }

@@ -36,8 +36,8 @@ namespace DotEditor.Native
 
             var typeElements = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                 from type in assembly.GetTypes()
-                                where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeElement))
-                                let attr = type.GetCustomAttribute<CustomNativeTypeElementAttribute>()
+                                where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeInnerStyleProcessor))
+                                let attr = type.GetCustomAttribute<CustomNativeInnerStyleProcessorAttribute>()
                                 select new { type = type, attr = attr }).ToArray();
             foreach (var typeElement in typeElements)
             {
@@ -51,7 +51,7 @@ namespace DotEditor.Native
             }
         }
 
-        public static NativeAttrProcessor CreateProcessor(NativeAttribute attr)
+        public static T CreateProcessor<T>(NativeAttribute attr) where T : NativeAttrProcessor
         {
             var attrType = attr.GetType();
             if (!m_AttrToProcessorDic.TryGetValue(attrType, out var processorType))
@@ -59,12 +59,18 @@ namespace DotEditor.Native
                 return null;
             }
 
-            return Activator.CreateInstance(processorType, attr) as NativeAttrProcessor;
+            return Activator.CreateInstance(processorType, attr) as T;
         }
 
-        public static NativeElement CreateElement(NativeMemberDrawer memberDrawer)
+        public static NativeInnerStyleProcessor CreateElement(NativeMemberDrawer memberDrawer)
         {
+            var memberType = memberDrawer.memberType;
+            if (!m_TypeToElementDic.TryGetValue(memberType, out var elementType))
+            {
+                return null;
+            }
 
+            return Activator.CreateInstance(elementType, memberDrawer) as NativeInnerStyleProcessor;
         }
 
     }

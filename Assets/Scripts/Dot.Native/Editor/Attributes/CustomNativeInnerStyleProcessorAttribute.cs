@@ -3,10 +3,10 @@
 namespace DotEditor.Native
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class CustomNativeTypeElementAttribute : Attribute
+    public class CustomNativeInnerStyleProcessorAttribute : Attribute
     {
         public Type memberType { get; private set; }
-        public CustomNativeTypeElementAttribute(Type memberType)
+        public CustomNativeInnerStyleProcessorAttribute(Type memberType)
         {
             this.memberType = memberType;
         }

@@ -16,7 +16,7 @@ namespace DotEngine.Native
         public string message { get; private set; }
         public NativeHelpMessageType messageType { get; private set; }
 
-        public NativeHelpAttribute(string message, NativeHelpMessageType messageType)
+        public NativeHelpAttribute(string message, NativeHelpMessageType messageType = NativeHelpMessageType.Info)
         {
             this.message = message;
             this.messageType = messageType;

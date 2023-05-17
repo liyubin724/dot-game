@@ -1,12 +1,10 @@
-﻿using UnityEngine.UIElements;
-
-namespace DotEditor.Native
+﻿namespace DotEditor.Native
 {
-    public abstract class NativeElement : VisualElement
+    public abstract class NativeInnerStyleProcessor : NativeProcessor
     {
         protected NativeMemberDrawer memberDrawer;
 
-        public NativeElement(NativeMemberDrawer memberDrawer)
+        public NativeInnerStyleProcessor(NativeMemberDrawer memberDrawer)
         {
             this.memberDrawer = memberDrawer;
         }

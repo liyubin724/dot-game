@@ -2,7 +2,12 @@
 
 namespace DotEditor.Native
 {
-    public abstract class NativeAttrProcessor
+    public abstract class NativeProcessor
+    {
+
+    }
+
+    public abstract class NativeAttrProcessor : NativeProcessor
     {
         protected NativeAttribute attr;
 

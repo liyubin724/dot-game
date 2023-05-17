@@ -2,11 +2,12 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeElement(typeof(string))]
-    public class NativeStringElement : NativeElement
+    [CustomNativeInnerStyleProcessor(typeof(string))]
+    public class NativeStringStyleProcessor : NativeInnerStyleProcessor
     {
         private TextField m_TextField;
-        public NativeStringElement(NativeMemberDrawer memberDrawer) : base(memberDrawer)
+
+        public NativeStringStyleProcessor(NativeMemberDrawer memberDrawer) : base(memberDrawer)
         {
         }
 
@@ -14,11 +15,10 @@ namespace DotEditor.Native
         {
             var containerView = context.containerElements.Peek();
 
-            string label = memberDrawer.label;
             m_TextField = new TextField();
-            if (!string.IsNullOrEmpty(label))
+            if (!string.IsNullOrEmpty(memberDrawer.label))
             {
-                m_TextField.label = label;
+                m_TextField.label = memberDrawer.label;
             }
             m_TextField.RegisterValueChangedCallback(evt =>
             {

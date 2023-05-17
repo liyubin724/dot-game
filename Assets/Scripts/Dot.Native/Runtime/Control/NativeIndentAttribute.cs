@@ -3,7 +3,7 @@
 namespace DotEngine.Native
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method)]
-    public class NativeIndentAttribute : NativeAttribute
+    public class NativeIndentAttribute : NativeControlAttribute
     {
         public int indent { get; private set; }
 

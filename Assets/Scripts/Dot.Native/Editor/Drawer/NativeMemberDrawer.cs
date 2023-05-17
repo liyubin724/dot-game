@@ -1,4 +1,5 @@
-﻿using DotEngine.Native;
+﻿using DotEngine.BL;
+using DotEngine.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,9 @@ namespace DotEditor.Native
 {
     public abstract class NativeMemberDrawer
     {
-        public bool visible
-        {
-            get
-            {
-                return true;
-            }
-        }
-        public string label { get; }
-        public virtual Type memberType { get; }
+        public abstract bool visible { get; }
+        public abstract string label { get; }
+        public abstract Type memberType { get; }
 
         protected NativeDrawer drawer;
         protected MemberInfo member;
@@ -36,36 +31,50 @@ namespace DotEditor.Native
         public void CreateGUI(NativeContext context)
         {
             memberView = new VisualElement();
-            context.containerElements.Push(memberView);
-            {
-                CreateControlGUI();
-                CreateDecoratorGUI();
-                CreateStyleGUI();
-            }
-            context.containerElements.Pop();
+            memberView.name = "member-drawer-container";
             var containerView = context.containerElements.Peek();
             containerView.Add(memberView);
-        }
 
-        protected void CreateControlGUI()
-        {
-            var controlAttrs = member.GetCustomAttributes<NativeControlAttribute>();
-
-        }
-
-        protected void CreateDecoratorGUI()
-        {
-            var decoratorAttrs = member.GetCustomAttributes<NativeDecoratorAttribute>();
-
-        }
-
-        protected virtual void CreateStyleGUI()
-        {
-            var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
-            if (styleAttr != null)
+            context.containerElements.Push(memberView);
             {
+                var controlAttrs = member.GetCustomAttributes<NativeControlAttribute>();
+                if (controlAttrs != null)
+                {
+                    foreach (var attr in controlAttrs)
+                    {
+                        var processor = NativeProvider.CreateProcessor<NativeControlProcessor>(attr);
+                        m_AttrProcessors.Add(processor);
+                        processor.OnControl(context);
+                    }
+                }
 
+                var decoratorAttrs = member.GetCustomAttributes<NativeDecoratorAttribute>();
+                if (decoratorAttrs != null)
+                {
+                    foreach (var attr in decoratorAttrs)
+                    {
+                        var processor = NativeProvider.CreateProcessor<NativeDecoratorProcessor>(attr);
+                        m_AttrProcessors.Add(processor);
+                        processor.OnCreateGUI(context);
+                    }
+                }
+                var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
+                if (styleAttr != null)
+                {
+                    var styleProcessor = NativeProvider.CreateProcessor<NativeStyleProcessor>(styleAttr);
+                    m_AttrProcessors.Add(styleProcessor);
+                    styleProcessor.OnStyleGUI(this, context);
+                }
+                else
+                {
+                    var typeElement = NativeProvider.CreateElement(this);
+                    if (typeElement != null)
+                    {
+                        typeElement.OnDrawer(context);
+                    }
+                }
             }
+            context.containerElements.Pop();
         }
 
         public virtual void OnValueChanged(object previousValue, object newValue)

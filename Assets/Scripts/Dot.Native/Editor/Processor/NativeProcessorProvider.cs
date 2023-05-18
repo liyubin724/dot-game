@@ -9,23 +9,31 @@ namespace DotEditor.Native
     public static class NativeProcessorProvider
     {
         private static Dictionary<Type, Type> m_AttrToProcessorDic = new Dictionary<Type, Type>();
+        private static Dictionary<Type, Type> m_TypeToProcessorDic = new Dictionary<Type, Type>();
         static NativeProcessorProvider()
         {
             var processorTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                   from type in assembly.GetTypes()
                                   where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeProcessor))
-                                  let attr = type.GetCustomAttribute<CustomNativeProcessorAttribute>()
-                                  where attr != null
-                                  select new { type = type, attr = attr }).ToArray();
+                                  let attrProcessor = type.GetCustomAttribute<CustomNativeAttrProcessorAttribute>()
+                                  let typeProcessor = type.GetCustomAttribute<CustomNativeTypeProcessorAttribute>()
+                                  where attrProcessor != null || typeProcessor != null
+                                  select new { type = type, typeProcessorAttr = typeProcessor, attrProcessorAttr = attrProcessor }
+                                  ).ToArray();
 
             foreach (var processorType in processorTypes)
             {
                 var type = processorType.type;
-                var attr = processorType.attr;
+                var typeProcessorAttr = processorType.typeProcessorAttr;
+                var attrProcessorAttr = processorType.attrProcessorAttr;
 
-                if (attr.attrType != null)
+                if (typeProcessorAttr != null && typeProcessorAttr.valueType != null)
                 {
-                    m_AttrToProcessorDic.Add(attr.attrType, type);
+                    m_TypeToProcessorDic.Add(typeProcessorAttr.valueType, type);
+                }
+                if (attrProcessorAttr != null && attrProcessorAttr.attrType != null)
+                {
+                    m_AttrToProcessorDic.Add(attrProcessorAttr.attrType, type);
                 }
             }
         }
@@ -47,7 +55,7 @@ namespace DotEditor.Native
 
         public static T CreateProcessor<T>(NativeMemberDrawer memberDrawer) where T : NativeInnerStyleProcessor
         {
-            if (!m_AttrToProcessorDic.TryGetValue(memberDrawer.memberType, out var processorType))
+            if (!m_TypeToProcessorDic.TryGetValue(memberDrawer.memberType, out var processorType))
             {
                 return null;
             }

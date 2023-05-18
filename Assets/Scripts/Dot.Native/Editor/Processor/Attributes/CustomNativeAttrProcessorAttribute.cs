@@ -3,10 +3,10 @@
 namespace DotEditor.Native
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class CustomNativeProcessorAttribute : Attribute
+    public class CustomNativeAttrProcessorAttribute : Attribute
     {
         public Type attrType { get; private set; }
-        public CustomNativeProcessorAttribute(Type attrType)
+        public CustomNativeAttrProcessorAttribute(Type attrType)
         {
             this.attrType = attrType;
         }

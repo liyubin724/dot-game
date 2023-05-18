@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeHelpAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeHelpAttribute))]
     public class NativeHelpProcessor : NativeDecoratorProcessor
     {
         public override void OnCreateGUI(NativeContext context)

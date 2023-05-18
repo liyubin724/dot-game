@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeReadonlyAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeReadonlyAttribute))]
     public class NativeReadonlyProcessor : NativeControlProcessor
     {
         public override void OnControl(NativeContext context)

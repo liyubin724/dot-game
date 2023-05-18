@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeHideAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeHideAttribute))]
     public class NativeHideProcessor : NativeVisibleProcessor
     {
         public override bool CalculateVisible()

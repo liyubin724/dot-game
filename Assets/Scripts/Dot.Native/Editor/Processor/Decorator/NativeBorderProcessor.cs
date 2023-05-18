@@ -3,7 +3,7 @@ using DotEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeBorderAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeBorderAttribute))]
     public class NativeBorderProcessor : NativeDecoratorProcessor
     {
         public override void OnCreateGUI(NativeContext context)

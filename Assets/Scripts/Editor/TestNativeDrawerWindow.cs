@@ -18,14 +18,15 @@ public class TestNativeDrawerWindow : EditorWindow
 
     public class TestData
     {
-        [NativeReadonly]
-        [NativeIndent(2)]
-        [NativeBorder(width = 4)]
-        [NativeBoxHeader("Native Box Header")]
-        [NativeHelp("Native Help Message", NativeHelpMessageType.Info)]
-        public string title;
-
+        public string stringValue;
         public int intValue;
+        public float floatValue;
+        public bool boolValue;
+
+        [NativeIntRange(0, 100)]
+        public int intRangeValue;
+
+        private string priStringValue;
     }
 
     private TestData m_Data = new TestData();

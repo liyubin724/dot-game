@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(bool))]
+    [CustomNativeTypeProcessor(typeof(bool))]
     public class NativeBoolStyleProcessor : NativeInnerStyleProcessor
     {
         private Toggle m_ToggleField;

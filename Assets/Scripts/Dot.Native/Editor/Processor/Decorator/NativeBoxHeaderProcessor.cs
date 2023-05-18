@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeBoxHeaderAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeBoxHeaderAttribute))]
     public class NativeBoxHeaderProcessor : NativeDecoratorProcessor
     {
 

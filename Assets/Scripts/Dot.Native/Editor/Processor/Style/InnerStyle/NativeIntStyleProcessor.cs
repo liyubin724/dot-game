@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(int))]
+    [CustomNativeTypeProcessor(typeof(int))]
     public class NativeIntStyleProcessor : NativeInnerStyleProcessor
     {
         private IntegerField m_IntField;

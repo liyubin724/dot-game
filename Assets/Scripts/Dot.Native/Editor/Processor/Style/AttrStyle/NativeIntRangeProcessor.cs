@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(NativeIntRangeAttribute))]
+    [CustomNativeAttrProcessor(typeof(NativeIntRangeAttribute))]
     public class NativeIntRangeProcessor : NativeAttrStyleProcessor
     {
         private SliderInt m_Slider;
@@ -13,7 +13,8 @@ namespace DotEditor.Native
             var containerView = context.containerElements.Peek();
 
             var intRangeAttr = (NativeIntRangeAttribute)attr;
-            m_Slider = new SliderInt();
+            m_Slider = new SliderInt(intRangeAttr.min, intRangeAttr.max);
+            m_Slider.showInputField = true;
             if (!string.IsNullOrEmpty(memberDrawer.label))
             {
                 m_Slider.label = memberDrawer.label;

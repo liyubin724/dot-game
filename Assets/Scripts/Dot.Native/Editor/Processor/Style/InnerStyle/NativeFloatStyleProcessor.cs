@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeProcessor(typeof(float))]
+    [CustomNativeTypeProcessor(typeof(float))]
     public class NativeFloatStyleProcessor : NativeInnerStyleProcessor
     {
         private FloatField m_FloatField;

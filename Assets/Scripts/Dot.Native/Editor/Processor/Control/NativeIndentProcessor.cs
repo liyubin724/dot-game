@@ -5,9 +5,6 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeIndentAttribute))]
     public class NativeIndentProcessor : NativeControlProcessor
     {
-        public NativeIndentProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
-        {
-        }
 
         public override void OnControl(NativeContext context)
         {

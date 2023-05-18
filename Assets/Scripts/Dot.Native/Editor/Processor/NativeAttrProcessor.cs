@@ -4,22 +4,13 @@ namespace DotEditor.Native
 {
     public abstract class NativeProcessor
     {
-        protected NativeMemberDrawer memberDrawer;
-
-        protected NativeProcessor(NativeMemberDrawer memberDrawer)
-        {
-            this.memberDrawer = memberDrawer;
-        }
+        public NativeMemberDrawer memberDrawer { get; set; }
     }
 
-    public abstract class NativeAttrProcessor : NativeProcessor
+    public abstract class NativeAttrProcessor
     {
-        protected NativeAttribute attr;
-
-        protected NativeAttrProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer)
-        {
-            this.attr = attr;
-        }
+        public NativeMemberDrawer memberDrawer { get; set; }
+        public NativeAttribute attr { get; set; }
 
         public T GetAttr<T>() where T : NativeAttribute
         {

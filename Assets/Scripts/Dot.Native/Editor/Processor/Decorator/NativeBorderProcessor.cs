@@ -6,10 +6,6 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeBorderAttribute))]
     public class NativeBorderProcessor : NativeDecoratorProcessor
     {
-        public NativeBorderProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
-        {
-        }
-
         public override void OnCreateGUI(NativeContext context)
         {
             var borderAttr = GetAttr<NativeBorderAttribute>();

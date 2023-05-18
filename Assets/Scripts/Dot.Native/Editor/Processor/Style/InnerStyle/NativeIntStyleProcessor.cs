@@ -2,14 +2,10 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeInnerStyleProcessor(typeof(int))]
+    [CustomNativeProcessor(typeof(int))]
     public class NativeIntStyleProcessor : NativeInnerStyleProcessor
     {
         private IntegerField m_IntField;
-
-        public NativeIntStyleProcessor(NativeMemberDrawer memberDrawer) : base(memberDrawer)
-        {
-        }
 
         public override void OnStyleGUI(NativeContext context)
         {

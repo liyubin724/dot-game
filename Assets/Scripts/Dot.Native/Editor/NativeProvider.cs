@@ -3,17 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DotEditor.Native
 {
     public static class NativeProvider
     {
         private static Dictionary<Type, Type> m_AttrToProcessorDic = new Dictionary<Type, Type>();
-
-        private static Dictionary<Type, Type> m_TypeToElementDic = new Dictionary<Type, Type>();
-
         static NativeProvider()
         {
             var processorTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
@@ -33,25 +28,9 @@ namespace DotEditor.Native
                     m_AttrToProcessorDic.Add(attr.attrType, type);
                 }
             }
-
-            var typeElements = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                                from type in assembly.GetTypes()
-                                where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeInnerStyleProcessor))
-                                let attr = type.GetCustomAttribute<CustomNativeInnerStyleProcessorAttribute>()
-                                select new { type = type, attr = attr }).ToArray();
-            foreach (var typeElement in typeElements)
-            {
-                var type = typeElement.type;
-                var attr = typeElement.attr;
-
-                if (attr.memberType != null)
-                {
-                    m_TypeToElementDic.Add(attr.memberType, type);
-                }
-            }
         }
 
-        public static T CreateProcessor<T>(NativeAttribute attr) where T : NativeAttrProcessor
+        public static T CreateProcessor<T>(NativeMemberDrawer memberDrawer, NativeAttribute attr) where T : NativeAttrProcessor
         {
             var attrType = attr.GetType();
             if (!m_AttrToProcessorDic.TryGetValue(attrType, out var processorType))
@@ -59,19 +38,23 @@ namespace DotEditor.Native
                 return null;
             }
 
-            return Activator.CreateInstance(processorType, attr) as T;
+            var attrProcessor = Activator.CreateInstance(processorType) as T;
+            attrProcessor.memberDrawer = memberDrawer;
+            attrProcessor.attr = attr;
+
+            return attrProcessor;
         }
 
-        public static NativeInnerStyleProcessor CreateElement(NativeMemberDrawer memberDrawer)
+        public static T CreateProcessor<T>(NativeMemberDrawer memberDrawer) where T : NativeInnerStyleProcessor
         {
-            var memberType = memberDrawer.memberType;
-            if (!m_TypeToElementDic.TryGetValue(memberType, out var elementType))
+            if (!m_AttrToProcessorDic.TryGetValue(memberDrawer.memberType, out var processorType))
             {
                 return null;
             }
 
-            return Activator.CreateInstance(elementType, memberDrawer) as NativeInnerStyleProcessor;
+            var attrProcessor = Activator.CreateInstance(processorType) as T;
+            attrProcessor.memberDrawer = memberDrawer;
+            return attrProcessor;
         }
-
     }
 }

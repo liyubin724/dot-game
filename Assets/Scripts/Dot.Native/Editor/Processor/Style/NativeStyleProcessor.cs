@@ -2,33 +2,18 @@
 
 namespace DotEditor.Native
 {
-    public abstract class NativeStyleProcessor : NativeProcessor
+    public abstract class NativeAttrStyleProcessor : NativeAttrProcessor
     {
-        protected NativeStyleProcessor(NativeMemberDrawer memberDrawer) : base(memberDrawer)
-        {
-        }
-
         public abstract void OnStyleGUI(NativeContext context);
     }
 
-    public abstract class NativeAttrStyleProcessor : NativeStyleProcessor
+    public abstract class NativeInnerStyleProcessor : NativeProcessor
     {
-        protected NativeAttribute attr;
-        protected NativeAttrStyleProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer)
-        {
-            this.attr = attr;
-        }
-
-        public T GetAttr<T>() where T : NativeAttribute
-        {
-            return (T)attr;
-        }
+        public abstract void OnStyleGUI(NativeContext context);
     }
 
-    public abstract class NativeInnerStyleProcessor : NativeStyleProcessor
+    public class NativeStyleNotFoundProcessor : NativeProcessor
     {
-        protected NativeInnerStyleProcessor(NativeMemberDrawer memberDrawer) : base(memberDrawer)
-        {
-        }
+
     }
 }

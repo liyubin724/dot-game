@@ -20,7 +20,9 @@ namespace DotEditor.Native
         protected MemberInfo member;
         protected VisualElement memberView;
 
-        private List<NativeAttrProcessor> m_AttrProcessors = new List<NativeAttrProcessor>();
+        private List<NativeControlProcessor> m_ControlProcessors = new List<NativeControlProcessor>();
+        private List<NativeDecoratorProcessor> m_DecoratorProcessors = new List<NativeDecoratorProcessor>();
+        private NativeStyleProcessor m_StyleProcessor;
 
         public NativeMemberDrawer(NativeDrawer drawer, MemberInfo memberInfo)
         {
@@ -42,9 +44,9 @@ namespace DotEditor.Native
                 {
                     foreach (var attr in controlAttrs)
                     {
-                        var processor = NativeProvider.CreateProcessor<NativeControlProcessor>(attr);
-                        m_AttrProcessors.Add(processor);
+                        var processor = NativeProvider.CreateProcessor<NativeControlProcessor>(this, attr);
                         processor.OnControl(context);
+                        m_ControlProcessors.Add(processor);
                     }
                 }
 
@@ -53,26 +55,24 @@ namespace DotEditor.Native
                 {
                     foreach (var attr in decoratorAttrs)
                     {
-                        var processor = NativeProvider.CreateProcessor<NativeDecoratorProcessor>(attr);
-                        m_AttrProcessors.Add(processor);
+                        var processor = NativeProvider.CreateProcessor<NativeDecoratorProcessor>(this, attr);
                         processor.OnCreateGUI(context);
+                        m_DecoratorProcessors.Add(processor);
                     }
                 }
-                //var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
-                //if (styleAttr != null)
-                //{
-                //    var styleProcessor = NativeProvider.CreateProcessor<NativeAttrStyleProcessor>(styleAttr);
-                //    m_AttrProcessors.Add(styleProcessor);
-                //    styleProcessor.OnStyleGUI(this, context);
-                //}
-                //else
-                //{
-                //    var typeElement = NativeProvider.CreateElement(this);
-                //    if (typeElement != null)
-                //    {
-                //        typeElement.OnDrawer(context);
-                //    }
-                //}
+                var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
+                if (styleAttr != null)
+                {
+                    m_StyleProcessor = NativeProvider.CreateProcessor<NativeAttrStyleProcessor>(this, styleAttr);
+                }
+                else
+                {
+                    m_StyleProcessor = NativeProvider.CreateProcessor<NativeInnerStyleProcessor>(this);
+                }
+                if (m_StyleProcessor == null)
+                {
+
+                }
             }
             context.containerElements.Pop();
         }

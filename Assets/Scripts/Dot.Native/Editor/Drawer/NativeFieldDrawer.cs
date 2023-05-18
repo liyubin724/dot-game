@@ -15,7 +15,7 @@ namespace DotEditor.Native
                 var visibleAttr = m_Field.GetCustomAttribute<NativeVisibleAttribute>();
                 if (visibleAttr != null)
                 {
-                    var visibleProcessor = NativeProvider.CreateProcessor<NativeVisibleProcessor>(visibleAttr);
+                    var visibleProcessor = NativeProvider.CreateProcessor<NativeVisibleProcessor>(this, visibleAttr);
                     if (visibleProcessor != null)
                     {
                         return visibleProcessor.CalculateVisible();
@@ -37,7 +37,7 @@ namespace DotEditor.Native
                 var labelAttr = m_Field.GetCustomAttribute<NativeLabelAttribute>();
                 if (labelAttr != null)
                 {
-                    var labelProcessor = NativeProvider.CreateProcessor<NativeLabelProcessor>(labelAttr);
+                    var labelProcessor = NativeProvider.CreateProcessor<NativeLabelProcessor>(this, labelAttr);
                     if (labelProcessor != null)
                     {
                         return labelProcessor.GetLabel();

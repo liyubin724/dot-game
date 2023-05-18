@@ -8,10 +8,6 @@ namespace DotEditor.Native
     {
         private SliderInt m_Slider;
 
-        public NativeIntRangeProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
-        {
-        }
-
         public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();

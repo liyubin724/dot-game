@@ -6,9 +6,6 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeBoxHeaderAttribute))]
     public class NativeBoxHeaderProcessor : NativeDecoratorProcessor
     {
-        public NativeBoxHeaderProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
-        {
-        }
 
         public override void OnCreateGUI(NativeContext context)
         {

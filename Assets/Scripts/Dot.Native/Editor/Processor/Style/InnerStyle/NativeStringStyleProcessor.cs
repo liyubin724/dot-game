@@ -2,14 +2,10 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeInnerStyleProcessor(typeof(string))]
+    [CustomNativeProcessor(typeof(string))]
     public class NativeStringStyleProcessor : NativeInnerStyleProcessor
     {
         private TextField m_TextField;
-
-        public NativeStringStyleProcessor(NativeMemberDrawer memberDrawer) : base(memberDrawer)
-        {
-        }
 
         public override void OnStyleGUI(NativeContext context)
         {

@@ -8,7 +8,7 @@ namespace DotEditor.Native
 
         public override void OnControl(NativeContext context)
         {
-            var indentAttr = GetAttr<NativeIndentAttribute>();
+            var indentAttr = (NativeIndentAttribute)attr;
             if (indentAttr.indent <= 0)
             {
                 return;

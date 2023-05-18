@@ -12,7 +12,7 @@ namespace DotEditor.Native
         {
             var containerView = context.containerElements.Peek();
 
-            var intRangeAttr = GetAttr<NativeIntRangeAttribute>();
+            var intRangeAttr = (NativeIntRangeAttribute)attr;
             m_Slider = new SliderInt();
             if (!string.IsNullOrEmpty(memberDrawer.label))
             {

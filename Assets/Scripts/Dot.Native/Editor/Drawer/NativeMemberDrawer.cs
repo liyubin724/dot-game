@@ -22,7 +22,7 @@ namespace DotEditor.Native
 
         private List<NativeControlProcessor> m_ControlProcessors = new List<NativeControlProcessor>();
         private List<NativeDecoratorProcessor> m_DecoratorProcessors = new List<NativeDecoratorProcessor>();
-        private NativeStyleProcessor m_StyleProcessor;
+        private INativeStyleProcessor m_StyleProcessor;
 
         public NativeMemberDrawer(NativeDrawer drawer, MemberInfo memberInfo)
         {
@@ -44,7 +44,7 @@ namespace DotEditor.Native
                 {
                     foreach (var attr in controlAttrs)
                     {
-                        var processor = NativeProvider.CreateProcessor<NativeControlProcessor>(this, attr);
+                        var processor = NativeProcessorProvider.CreateProcessor<NativeControlProcessor>(this, attr);
                         processor.OnControl(context);
                         m_ControlProcessors.Add(processor);
                     }
@@ -55,7 +55,7 @@ namespace DotEditor.Native
                 {
                     foreach (var attr in decoratorAttrs)
                     {
-                        var processor = NativeProvider.CreateProcessor<NativeDecoratorProcessor>(this, attr);
+                        var processor = NativeProcessorProvider.CreateProcessor<NativeDecoratorProcessor>(this, attr);
                         processor.OnCreateGUI(context);
                         m_DecoratorProcessors.Add(processor);
                     }
@@ -63,16 +63,19 @@ namespace DotEditor.Native
                 var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
                 if (styleAttr != null)
                 {
-                    m_StyleProcessor = NativeProvider.CreateProcessor<NativeAttrStyleProcessor>(this, styleAttr);
+                    m_StyleProcessor = NativeProcessorProvider.CreateProcessor<NativeAttrStyleProcessor>(this, styleAttr);
                 }
                 else
                 {
-                    m_StyleProcessor = NativeProvider.CreateProcessor<NativeInnerStyleProcessor>(this);
+                    m_StyleProcessor = NativeProcessorProvider.CreateProcessor<NativeInnerStyleProcessor>(this);
                 }
+
                 if (m_StyleProcessor == null)
                 {
-
+                    m_StyleProcessor = new NativeStyleNotFoundProcessor();
+                    m_StyleProcessor.memberDrawer = this;
                 }
+                m_StyleProcessor.OnStyleGUI(context);
             }
             context.containerElements.Pop();
         }

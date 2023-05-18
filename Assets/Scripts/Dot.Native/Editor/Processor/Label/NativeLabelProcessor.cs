@@ -1,8 +1,10 @@
-﻿using DotEngine.Native;
-
-namespace DotEditor.Native
+﻿namespace DotEditor.Native
 {
-    public abstract class NativeLabelProcessor : NativeAttrProcessor
+    public interface INativeLabelProcessor : INativeAttrProcessor
+    {
+        string GetLabel();
+    }
+    public abstract class NativeLabelProcessor : NativeAttrProcessor, INativeLabelProcessor
     {
         public abstract string GetLabel();
     }

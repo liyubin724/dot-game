@@ -6,14 +6,14 @@ using System.Reflection;
 
 namespace DotEditor.Native
 {
-    public static class NativeProvider
+    public static class NativeProcessorProvider
     {
         private static Dictionary<Type, Type> m_AttrToProcessorDic = new Dictionary<Type, Type>();
-        static NativeProvider()
+        static NativeProcessorProvider()
         {
             var processorTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                   from type in assembly.GetTypes()
-                                  where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeAttrProcessor))
+                                  where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeProcessor))
                                   let attr = type.GetCustomAttribute<CustomNativeProcessorAttribute>()
                                   where attr != null
                                   select new { type = type, attr = attr }).ToArray();

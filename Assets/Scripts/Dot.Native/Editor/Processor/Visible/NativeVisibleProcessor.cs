@@ -2,7 +2,12 @@
 
 namespace DotEditor.Native
 {
-    public abstract class NativeVisibleProcessor : NativeAttrProcessor
+    public interface INativeVisibleProcessor : INativeAttrProcessor
+    {
+        bool CalculateVisible();
+    }
+
+    public abstract class NativeVisibleProcessor : NativeAttrProcessor, INativeVisibleProcessor
     {
         public abstract bool CalculateVisible();
     }

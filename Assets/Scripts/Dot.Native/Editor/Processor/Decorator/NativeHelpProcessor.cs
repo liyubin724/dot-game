@@ -8,7 +8,7 @@ namespace DotEditor.Native
     {
         public override void OnCreateGUI(NativeContext context)
         {
-            var helpAttr = GetAttr<NativeHelpAttribute>();
+            var helpAttr = (NativeHelpAttribute)attr;
 
             var help = new HelpBox(helpAttr.message, (HelpBoxMessageType)helpAttr.messageType);
 

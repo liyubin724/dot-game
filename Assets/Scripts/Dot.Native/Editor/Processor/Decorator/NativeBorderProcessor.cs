@@ -8,7 +8,7 @@ namespace DotEditor.Native
     {
         public override void OnCreateGUI(NativeContext context)
         {
-            var borderAttr = GetAttr<NativeBorderAttribute>();
+            var borderAttr = (NativeBorderAttribute)attr;
 
             var containerView = context.containerElements.Peek();
             containerView.SetBorderColor(borderAttr.color);

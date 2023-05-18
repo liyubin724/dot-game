@@ -1,8 +1,11 @@
-﻿using DotEngine.Native;
-
-namespace DotEditor.Native
+﻿namespace DotEditor.Native
 {
-    public abstract class NativeControlProcessor : NativeAttrProcessor
+    public interface INativeControlProcessor : INativeAttrProcessor
+    {
+        void OnControl(NativeContext context);
+    }
+
+    public abstract class NativeControlProcessor : NativeAttrProcessor, INativeControlProcessor
     {
         public abstract void OnControl(NativeContext context);
     }

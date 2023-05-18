@@ -9,7 +9,7 @@ namespace DotEditor.Native
 
         public override void OnCreateGUI(NativeContext context)
         {
-            var boxHeaderAttr = GetAttr<NativeBoxHeaderAttribute>();
+            var boxHeaderAttr = (NativeBoxHeaderAttribute)attr;
             var containerView = context.containerElements.Peek();
 
             var box = new Box();

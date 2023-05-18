@@ -7,8 +7,7 @@ namespace DotEditor.Native
     {
         public override string GetLabel()
         {
-            var labelAttr = GetAttr<NativeNewLabelAttribute>();
-            return labelAttr.newLabel;
+            return ((NativeNewLabelAttribute)attr).newLabel;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeProcessor(typeof(string))]
+    [CustomNativeProcessor(typeof(string))]
     public class NativeStringProcessor : NativeInnerStyleProcessor
     {
         private TextField m_TextField;

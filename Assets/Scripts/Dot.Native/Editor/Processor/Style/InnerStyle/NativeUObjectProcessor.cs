@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeProcessor(typeof(UnityEngine.Object), true)]
+    [CustomNativeProcessor(typeof(UnityEngine.Object))]
     public class NativeUObjectProcessor : NativeInnerStyleProcessor
     {
         private ObjectField m_ObjectField;

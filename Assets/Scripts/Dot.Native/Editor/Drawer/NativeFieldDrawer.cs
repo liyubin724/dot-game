@@ -50,6 +50,20 @@ namespace DotEditor.Native
 
         public override Type memberType => m_Field.FieldType;
 
+        public object value
+        {
+            get
+            {
+                return m_Field.GetValue(drawer.data);
+            }
+
+            set
+            {
+                var prevValue = m_Field.GetValue(drawer.data);
+                OnValueChanged(prevValue, value);
+            }
+        }
+
         public NativeFieldDrawer(NativeDrawer drawer, FieldInfo fieldInfo) : base(drawer, fieldInfo)
         {
             m_Field = fieldInfo;

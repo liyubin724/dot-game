@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeAttrProcessor(typeof(NativeIndentAttribute))]
+    [CustomNativeProcessor(typeof(NativeIndentAttribute))]
     public class NativeIndentProcessor : NativeControlProcessor
     {
 

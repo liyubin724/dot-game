@@ -2,7 +2,7 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeAttrProcessor(typeof(NativeNewLabelAttribute))]
+    [CustomNativeProcessor(typeof(NativeNewLabelAttribute))]
     public class NativeNewLabelProcessor : NativeLabelProcessor
     {
         public override string GetLabel()

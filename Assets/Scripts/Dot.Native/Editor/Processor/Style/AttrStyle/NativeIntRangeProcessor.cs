@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace DotEditor.Native
 {
-    [CustomNativeAttrProcessor(typeof(NativeIntRangeAttribute))]
+    [CustomNativeProcessor(typeof(NativeIntRangeAttribute))]
     public class NativeIntRangeProcessor : NativeAttrStyleProcessor
     {
         private SliderInt m_Slider;

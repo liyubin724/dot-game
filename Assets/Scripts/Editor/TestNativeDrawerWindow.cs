@@ -1,5 +1,5 @@
-using DotEditor.Native;
-using DotEngine.Native;
+using DotEditor.NDrawer;
+using DotEngine.NDrawer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -31,7 +31,9 @@ public class TestNativeDrawerWindow : EditorWindow
 
     private void CreateGUI()
     {
-        m_ObjectDrawer = new NativeObjectDrawer(m_Data, true);
+        m_ObjectDrawer = new NativeObjectDrawer(m_Data);
+        m_ObjectDrawer.showFoldoutHeader = true;
+        m_ObjectDrawer.headerTitle = "Test Data Value";
         m_ObjectDrawer.CreateGUI(rootVisualElement);
     }
 }

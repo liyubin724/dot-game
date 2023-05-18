@@ -16,24 +16,18 @@ public class TestNativeDrawerWindow : EditorWindow
         win.Show();
     }
 
-    public class TestData
-    {
-        //public string stringValue;
-        //public int intValue;
-        //public float floatValue;
-        //public bool boolValue;
-
-        //[NativeIntRange(0, 100)]
-        //public int intRangeValue;
-
-        //private string priStringValue;
-
-        [NativeShow]
-        private Material matValue;
-    }
-
-    private TestData m_Data = new TestData();
+    private TestData m_Data;
     private NativeObjectDrawer m_ObjectDrawer;
+
+    private void OnEnable()
+    {
+        m_Data = AssetDatabase.LoadAssetAtPath<TestData>("Assets/t.asset");
+        if (m_Data == null)
+        {
+            m_Data = ScriptableObject.CreateInstance<TestData>();
+            AssetDatabase.CreateAsset(m_Data, "Assets/t.asset");
+        }
+    }
 
     private void CreateGUI()
     {

@@ -8,11 +8,23 @@ namespace DotEditor.Native
 {
     public static class NativeProcessorProvider
     {
-        private static Dictionary<Type, Type> m_AttrToProcessorDic = new Dictionary<Type, Type>();
-        private static Dictionary<Type, Type> m_TypeToProcessorDic = new Dictionary<Type, Type>();
+        class AttrProcessorData
+        {
+            public Type type;
+            public CustomNativeAttrProcessorAttribute attr;
+        }
+
+        class TypeProcessorData
+        {
+            public Type type;
+            public CustomNativeTypeProcessorAttribute attr;
+        }
+
+        private static Dictionary<Type, AttrProcessorData> m_AttrToProcessorDic = new Dictionary<Type, AttrProcessorData>();
+        private static Dictionary<Type, TypeProcessorData> m_TypeToProcessorDic = new Dictionary<Type, TypeProcessorData>();
         static NativeProcessorProvider()
         {
-            var processorTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
+            var processorInfos = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                                   from type in assembly.GetTypes()
                                   where !type.IsAbstract && type.IsPublic && type.IsSubclassOf(typeof(NativeProcessor))
                                   let attrProcessor = type.GetCustomAttribute<CustomNativeAttrProcessorAttribute>()
@@ -21,19 +33,19 @@ namespace DotEditor.Native
                                   select new { type = type, typeProcessorAttr = typeProcessor, attrProcessorAttr = attrProcessor }
                                   ).ToArray();
 
-            foreach (var processorType in processorTypes)
+            foreach (var processorInfo in processorInfos)
             {
-                var type = processorType.type;
-                var typeProcessorAttr = processorType.typeProcessorAttr;
-                var attrProcessorAttr = processorType.attrProcessorAttr;
+                var processorType = processorInfo.type;
+                var typeProcessorAttr = processorInfo.typeProcessorAttr;
+                var attrProcessorAttr = processorInfo.attrProcessorAttr;
 
                 if (typeProcessorAttr != null && typeProcessorAttr.valueType != null)
                 {
-                    m_TypeToProcessorDic.Add(typeProcessorAttr.valueType, type);
+                    m_TypeToProcessorDic.Add(typeProcessorAttr.valueType, new TypeProcessorData() { type = processorType, attr = typeProcessorAttr });
                 }
                 if (attrProcessorAttr != null && attrProcessorAttr.attrType != null)
                 {
-                    m_AttrToProcessorDic.Add(attrProcessorAttr.attrType, type);
+                    m_AttrToProcessorDic.Add(attrProcessorAttr.attrType, new AttrProcessorData() { type = processorType, attr = attrProcessorAttr });
                 }
             }
         }
@@ -41,12 +53,12 @@ namespace DotEditor.Native
         public static T CreateProcessor<T>(NativeMemberDrawer memberDrawer, NativeAttribute attr) where T : NativeAttrProcessor
         {
             var attrType = attr.GetType();
-            if (!m_AttrToProcessorDic.TryGetValue(attrType, out var processorType))
+            if (!m_AttrToProcessorDic.TryGetValue(attrType, out var processorData))
             {
                 return null;
             }
 
-            var attrProcessor = Activator.CreateInstance(processorType) as T;
+            var attrProcessor = Activator.CreateInstance(processorData.type) as T;
             attrProcessor.memberDrawer = memberDrawer;
             attrProcessor.attr = attr;
 
@@ -55,7 +67,23 @@ namespace DotEditor.Native
 
         public static T CreateProcessor<T>(NativeMemberDrawer memberDrawer) where T : NativeInnerStyleProcessor
         {
-            if (!m_TypeToProcessorDic.TryGetValue(memberDrawer.memberType, out var processorType))
+            Type processorType = null;
+            if (m_TypeToProcessorDic.TryGetValue(memberDrawer.memberType, out var processorData))
+            {
+                processorType = processorData.type;
+            }
+            if (processorType == null)
+            {
+                foreach (var kvp in m_TypeToProcessorDic)
+                {
+                    if (kvp.Value.attr.compatibleSubtype && kvp.Value.attr.valueType.IsAssignableFrom(memberDrawer.memberType))
+                    {
+                        processorType = kvp.Value.type;
+                    }
+                }
+            }
+
+            if (processorType == null)
             {
                 return null;
             }

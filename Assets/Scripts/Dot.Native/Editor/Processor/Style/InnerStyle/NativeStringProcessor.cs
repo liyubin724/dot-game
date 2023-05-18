@@ -2,26 +2,25 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeProcessor(typeof(int))]
-    public class NativeIntStyleProcessor : NativeInnerStyleProcessor
+    [CustomNativeTypeProcessor(typeof(string))]
+    public class NativeStringProcessor : NativeInnerStyleProcessor
     {
-        private IntegerField m_IntField;
+        private TextField m_TextField;
 
         public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();
 
-            m_IntField = new IntegerField();
+            m_TextField = new TextField();
             if (!string.IsNullOrEmpty(memberDrawer.label))
             {
-                m_IntField.label = memberDrawer.label;
+                m_TextField.label = memberDrawer.label;
             }
-            m_IntField.RegisterValueChangedCallback(evt =>
+            m_TextField.RegisterValueChangedCallback(evt =>
             {
                 memberDrawer.OnValueChanged(evt.previousValue, evt.newValue);
             });
-
-            containerView.Add(m_IntField);
+            containerView.Add(m_TextField);
         }
     }
 }

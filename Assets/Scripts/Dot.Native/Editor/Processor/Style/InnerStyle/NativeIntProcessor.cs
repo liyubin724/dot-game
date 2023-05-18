@@ -2,25 +2,26 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeProcessor(typeof(bool))]
-    public class NativeBoolStyleProcessor : NativeInnerStyleProcessor
+    [CustomNativeTypeProcessor(typeof(int))]
+    public class NativeIntProcessor : NativeInnerStyleProcessor
     {
-        private Toggle m_ToggleField;
+        private IntegerField m_IntField;
+
         public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();
 
-            m_ToggleField = new Toggle();
+            m_IntField = new IntegerField();
             if (!string.IsNullOrEmpty(memberDrawer.label))
             {
-                m_ToggleField.label = memberDrawer.label;
+                m_IntField.label = memberDrawer.label;
             }
-            m_ToggleField.RegisterValueChangedCallback(evt =>
+            m_IntField.RegisterValueChangedCallback(evt =>
             {
                 memberDrawer.OnValueChanged(evt.previousValue, evt.newValue);
             });
 
-            containerView.Add(m_ToggleField);
+            containerView.Add(m_IntField);
         }
     }
 }

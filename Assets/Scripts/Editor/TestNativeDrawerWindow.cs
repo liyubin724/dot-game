@@ -18,15 +18,18 @@ public class TestNativeDrawerWindow : EditorWindow
 
     public class TestData
     {
-        public string stringValue;
-        public int intValue;
-        public float floatValue;
-        public bool boolValue;
+        //public string stringValue;
+        //public int intValue;
+        //public float floatValue;
+        //public bool boolValue;
 
-        [NativeIntRange(0, 100)]
-        public int intRangeValue;
+        //[NativeIntRange(0, 100)]
+        //public int intRangeValue;
 
-        private string priStringValue;
+        //private string priStringValue;
+
+        [NativeShow]
+        private Material matValue;
     }
 
     private TestData m_Data = new TestData();

@@ -2,25 +2,25 @@
 
 namespace DotEditor.Native
 {
-    [CustomNativeTypeProcessor(typeof(float))]
-    public class NativeFloatStyleProcessor : NativeInnerStyleProcessor
+    [CustomNativeTypeProcessor(typeof(bool))]
+    public class NativeBoolProcessor : NativeInnerStyleProcessor
     {
-        private FloatField m_FloatField;
+        private Toggle m_ToggleField;
         public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();
 
-            m_FloatField = new FloatField();
+            m_ToggleField = new Toggle();
             if (!string.IsNullOrEmpty(memberDrawer.label))
             {
-                m_FloatField.label = memberDrawer.label;
+                m_ToggleField.label = memberDrawer.label;
             }
-            m_FloatField.RegisterValueChangedCallback(evt =>
+            m_ToggleField.RegisterValueChangedCallback(evt =>
             {
                 memberDrawer.OnValueChanged(evt.previousValue, evt.newValue);
             });
 
-            containerView.Add(m_FloatField);
+            containerView.Add(m_ToggleField);
         }
     }
 }

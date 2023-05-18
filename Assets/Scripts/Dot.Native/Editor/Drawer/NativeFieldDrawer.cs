@@ -58,6 +58,8 @@ namespace DotEditor.Native
         public override void OnValueChanged(object previousValue, object newValue)
         {
             m_Field.SetValue(drawer.data, newValue);
+
+            base.OnValueChanged(previousValue, newValue);
         }
     }
 }

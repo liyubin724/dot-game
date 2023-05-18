@@ -1,11 +1,7 @@
-﻿using DotEngine.BL;
-using DotEngine.Native;
+﻿using DotEngine.Native;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.UIElements;
 
 namespace DotEditor.Native
@@ -28,6 +24,32 @@ namespace DotEditor.Native
         {
             this.drawer = drawer;
             this.member = memberInfo;
+
+            var controlAttrs = member.GetCustomAttributes<NativeControlAttribute>();
+            if (controlAttrs != null)
+            {
+                foreach (var attr in controlAttrs)
+                {
+                    var processor = NativeProcessorProvider.CreateProcessor<NativeControlProcessor>(this, attr);
+                    m_ControlProcessors.Add(processor);
+                }
+            }
+
+            var decoratorAttrs = member.GetCustomAttributes<NativeDecoratorAttribute>();
+            if (decoratorAttrs != null)
+            {
+                foreach (var attr in decoratorAttrs)
+                {
+                    var processor = NativeProcessorProvider.CreateProcessor<NativeDecoratorProcessor>(this, attr);
+                    m_DecoratorProcessors.Add(processor);
+                }
+            }
+
+            var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
+            if (styleAttr != null)
+            {
+                m_StyleProcessor = NativeProcessorProvider.CreateProcessor<NativeAttrStyleProcessor>(this, styleAttr);
+            }
         }
 
         public void CreateGUI(NativeContext context)
@@ -39,33 +61,17 @@ namespace DotEditor.Native
 
             context.containerElements.Push(memberView);
             {
-                var controlAttrs = member.GetCustomAttributes<NativeControlAttribute>();
-                if (controlAttrs != null)
+                foreach (var processor in m_ControlProcessors)
                 {
-                    foreach (var attr in controlAttrs)
-                    {
-                        var processor = NativeProcessorProvider.CreateProcessor<NativeControlProcessor>(this, attr);
-                        processor.OnControl(context);
-                        m_ControlProcessors.Add(processor);
-                    }
+                    processor.OnControl(context);
                 }
 
-                var decoratorAttrs = member.GetCustomAttributes<NativeDecoratorAttribute>();
-                if (decoratorAttrs != null)
+                foreach (var processor in m_DecoratorProcessors)
                 {
-                    foreach (var attr in decoratorAttrs)
-                    {
-                        var processor = NativeProcessorProvider.CreateProcessor<NativeDecoratorProcessor>(this, attr);
-                        processor.OnCreateGUI(context);
-                        m_DecoratorProcessors.Add(processor);
-                    }
+                    processor.OnCreateGUI(context);
                 }
-                var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
-                if (styleAttr != null)
-                {
-                    m_StyleProcessor = NativeProcessorProvider.CreateProcessor<NativeAttrStyleProcessor>(this, styleAttr);
-                }
-                else
+
+                if (m_StyleProcessor == null)
                 {
                     m_StyleProcessor = NativeProcessorProvider.CreateProcessor<NativeInnerStyleProcessor>(this);
                 }
@@ -78,11 +84,26 @@ namespace DotEditor.Native
                 m_StyleProcessor.OnStyleGUI(context);
             }
             context.containerElements.Pop();
+
+            if (!visible)
+            {
+                memberView.style.display = DisplayStyle.None;
+                memberView.style.visibility = Visibility.Hidden;
+            }
         }
 
         public virtual void OnValueChanged(object previousValue, object newValue)
         {
-
+            if (!visible)
+            {
+                memberView.style.display = DisplayStyle.None;
+                memberView.style.visibility = Visibility.Hidden;
+            }
+            else
+            {
+                memberView.style.display = DisplayStyle.Flex;
+                memberView.style.visibility = Visibility.Visible;
+            }
         }
     }
 }

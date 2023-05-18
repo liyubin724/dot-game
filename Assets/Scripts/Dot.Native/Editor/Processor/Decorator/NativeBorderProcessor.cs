@@ -6,19 +6,18 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeBorderAttribute))]
     public class NativeBorderProcessor : NativeDecoratorProcessor
     {
-        private NativeBorderAttribute m_BorderAttr;
-
-        public NativeBorderProcessor(NativeAttribute attr) : base(attr)
+        public NativeBorderProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
-            m_BorderAttr = GetAttr<NativeBorderAttribute>();
         }
 
         public override void OnCreateGUI(NativeContext context)
         {
+            var borderAttr = GetAttr<NativeBorderAttribute>();
+
             var containerView = context.containerElements.Peek();
-            containerView.SetBorderColor(m_BorderAttr.color);
-            containerView.SetBorderWidth(m_BorderAttr.width);
-            containerView.SetBorderRadius(m_BorderAttr.radius);
+            containerView.SetBorderColor(borderAttr.color);
+            containerView.SetBorderWidth(borderAttr.width);
+            containerView.SetBorderRadius(borderAttr.radius);
         }
     }
 }

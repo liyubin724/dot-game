@@ -5,7 +5,7 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeNewLabelAttribute))]
     public class NativeNewLabelProcessor : NativeLabelProcessor
     {
-        public NativeNewLabelProcessor(NativeAttribute attr) : base(attr)
+        public NativeNewLabelProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

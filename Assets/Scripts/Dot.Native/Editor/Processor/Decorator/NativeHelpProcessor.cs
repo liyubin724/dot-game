@@ -6,7 +6,7 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeHelpAttribute))]
     public class NativeHelpProcessor : NativeDecoratorProcessor
     {
-        public NativeHelpProcessor(NativeAttribute attr) : base(attr)
+        public NativeHelpProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

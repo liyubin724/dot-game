@@ -58,21 +58,21 @@ namespace DotEditor.Native
                         processor.OnCreateGUI(context);
                     }
                 }
-                var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
-                if (styleAttr != null)
-                {
-                    var styleProcessor = NativeProvider.CreateProcessor<NativeStyleProcessor>(styleAttr);
-                    m_AttrProcessors.Add(styleProcessor);
-                    styleProcessor.OnStyleGUI(this, context);
-                }
-                else
-                {
-                    var typeElement = NativeProvider.CreateElement(this);
-                    if (typeElement != null)
-                    {
-                        typeElement.OnDrawer(context);
-                    }
-                }
+                //var styleAttr = member.GetCustomAttribute<NativeStyleAttribute>();
+                //if (styleAttr != null)
+                //{
+                //    var styleProcessor = NativeProvider.CreateProcessor<NativeAttrStyleProcessor>(styleAttr);
+                //    m_AttrProcessors.Add(styleProcessor);
+                //    styleProcessor.OnStyleGUI(this, context);
+                //}
+                //else
+                //{
+                //    var typeElement = NativeProvider.CreateElement(this);
+                //    if (typeElement != null)
+                //    {
+                //        typeElement.OnDrawer(context);
+                //    }
+                //}
             }
             context.containerElements.Pop();
         }

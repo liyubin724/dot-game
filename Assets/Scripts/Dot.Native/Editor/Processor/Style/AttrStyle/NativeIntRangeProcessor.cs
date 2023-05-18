@@ -4,14 +4,15 @@ using UnityEngine.UIElements;
 namespace DotEditor.Native
 {
     [CustomNativeProcessor(typeof(NativeIntRangeAttribute))]
-    public class NativeIntRangeProcessor : NativeStyleProcessor
+    public class NativeIntRangeProcessor : NativeAttrStyleProcessor
     {
         private SliderInt m_Slider;
-        public NativeIntRangeProcessor(NativeAttribute attr) : base(attr)
+
+        public NativeIntRangeProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 
-        public override void OnStyleGUI(NativeMemberDrawer memberDrawer, NativeContext context)
+        public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();
 
@@ -27,5 +28,6 @@ namespace DotEditor.Native
             });
             containerView.Add(m_Slider);
         }
+
     }
 }

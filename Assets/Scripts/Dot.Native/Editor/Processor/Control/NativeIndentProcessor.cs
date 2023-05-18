@@ -5,22 +5,20 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeIndentAttribute))]
     public class NativeIndentProcessor : NativeControlProcessor
     {
-        private NativeIndentAttribute m_IndentAttr;
-
-        public NativeIndentProcessor(NativeAttribute attr) : base(attr)
+        public NativeIndentProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
-            m_IndentAttr = GetAttr<NativeIndentAttribute>();
         }
 
         public override void OnControl(NativeContext context)
         {
-            if (m_IndentAttr.indent <= 0)
+            var indentAttr = GetAttr<NativeIndentAttribute>();
+            if (indentAttr.indent <= 0)
             {
                 return;
             }
 
             var containerView = context.containerElements.Peek();
-            containerView.style.marginLeft = m_IndentAttr.indent * 20;
+            containerView.style.marginLeft = indentAttr.indent * 20;
         }
     }
 }

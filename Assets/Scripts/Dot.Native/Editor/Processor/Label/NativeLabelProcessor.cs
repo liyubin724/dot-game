@@ -4,7 +4,7 @@ namespace DotEditor.Native
 {
     public abstract class NativeLabelProcessor : NativeAttrProcessor
     {
-        protected NativeLabelProcessor(NativeAttribute attr) : base(attr)
+        protected NativeLabelProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

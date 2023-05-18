@@ -5,7 +5,7 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeShowAttribute))]
     public class NativeShowProcessor : NativeVisibleProcessor
     {
-        public NativeShowProcessor(NativeAttribute attr) : base(attr)
+        public NativeShowProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

@@ -6,19 +6,18 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeBoxHeaderAttribute))]
     public class NativeBoxHeaderProcessor : NativeDecoratorProcessor
     {
-        private NativeBoxHeaderAttribute m_BoxHeaderAttr;
-        public NativeBoxHeaderProcessor(NativeAttribute attr) : base(attr)
+        public NativeBoxHeaderProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
-            m_BoxHeaderAttr = GetAttr<NativeBoxHeaderAttribute>();
         }
 
         public override void OnCreateGUI(NativeContext context)
         {
+            var boxHeaderAttr = GetAttr<NativeBoxHeaderAttribute>();
             var containerView = context.containerElements.Peek();
 
             var box = new Box();
             var label = new Label();
-            label.text = m_BoxHeaderAttr.header;
+            label.text = boxHeaderAttr.header;
             box.Add(label);
             containerView.Add(box);
 

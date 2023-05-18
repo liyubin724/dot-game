@@ -4,7 +4,7 @@ namespace DotEditor.Native
 {
     public abstract class NativeDecoratorProcessor : NativeAttrProcessor
     {
-        protected NativeDecoratorProcessor(NativeAttribute attr) : base(attr)
+        protected NativeDecoratorProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

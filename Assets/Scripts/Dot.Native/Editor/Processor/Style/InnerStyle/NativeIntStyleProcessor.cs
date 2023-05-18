@@ -11,7 +11,7 @@ namespace DotEditor.Native
         {
         }
 
-        public override void OnDrawer(NativeContext context)
+        public override void OnStyleGUI(NativeContext context)
         {
             var containerView = context.containerElements.Peek();
 

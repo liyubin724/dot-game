@@ -5,7 +5,7 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeReadonlyAttribute))]
     public class NativeReadonlyProcessor : NativeControlProcessor
     {
-        public NativeReadonlyProcessor(NativeAttribute attr) : base(attr)
+        public NativeReadonlyProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

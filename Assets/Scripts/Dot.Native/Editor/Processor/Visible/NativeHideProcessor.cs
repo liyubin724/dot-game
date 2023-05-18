@@ -5,7 +5,7 @@ namespace DotEditor.Native
     [CustomNativeProcessor(typeof(NativeHideAttribute))]
     public class NativeHideProcessor : NativeVisibleProcessor
     {
-        public NativeHideProcessor(NativeAttribute attr) : base(attr)
+        public NativeHideProcessor(NativeMemberDrawer memberDrawer, NativeAttribute attr) : base(memberDrawer, attr)
         {
         }
 

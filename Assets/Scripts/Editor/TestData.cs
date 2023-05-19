@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Rendering;
 
+public class InnerData
+{
+    public int innerIntValue;
+    public string innerStringValue;
+    public float innerDoubleValue;
+}
+
 public class BaseTestData1 : ScriptableObject
 {
     public bool base1BoolValue;
@@ -37,5 +44,7 @@ public class TestData : BaseTestData2
     [NativeIntRange(0, 100)]
     public int intRangeValue;
 
-    private string priStringValue;
+    public InnerData innerDataValue;
+
+    //private string priStringValue;
 }

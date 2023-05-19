@@ -31,9 +31,7 @@ public class TestNativeDrawerWindow : EditorWindow
 
     private void CreateGUI()
     {
-        m_ObjectDrawer = new NativeObjectDrawer(m_Data);
-        m_ObjectDrawer.showFoldoutHeader = true;
-        m_ObjectDrawer.headerTitle = "Test Data Value";
+        m_ObjectDrawer = new NativeObjectDrawer("Test Data Value", m_Data, true);
         m_ObjectDrawer.CreateGUI(rootVisualElement);
     }
 }

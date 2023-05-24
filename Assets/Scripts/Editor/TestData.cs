@@ -39,11 +39,15 @@ public class TestData : BaseTestData2
     public Vector3 vector3Value;
     public Vector4 vector4Value;
 
+    [NativeReadonly]
     public TestData scriptableObjectValue;
 
     [NativeIntRange(0, 100)]
     public int intRangeValue;
 
+    [NativeIndent(2)]
+    [NativeHelp("Inner Data View Drawer")]
+    [NativeReadonly]
     public InnerData innerDataValue;
 
     //private string priStringValue;

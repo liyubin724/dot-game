@@ -65,8 +65,8 @@ namespace DotEditor.Avatar
             Add(m_TransformField);
 
             m_RendererField = new ObjectField("Renderer");
-            m_TransformField.objectType = typeof(Renderer);
-            m_TransformField.RegisterValueChangedCallback(evt =>
+            m_RendererField.objectType = typeof(Renderer);
+            m_RendererField.RegisterValueChangedCallback(evt =>
             {
                 if (m_NodeData != null)
                 {
@@ -167,14 +167,24 @@ namespace DotEditor.Avatar
         {
             m_RootView = new VisualElement();
 
-            m_BoneListView = CreateNodeListView("Bone List", AvatarNodeType.BoneNode, m_NodeBehaviour.boneNodes);
-            m_RootView.Add(m_BoneListView);
-
             m_BindListView = CreateNodeListView("Bind List", AvatarNodeType.BindNode, m_NodeBehaviour.bindNodes);
             m_RootView.Add(m_BindListView);
 
+            m_BoneListView = CreateNodeListView("Bone List", AvatarNodeType.BoneNode, m_NodeBehaviour.boneNodes);
+            m_RootView.Add(m_BoneListView);
+
             m_RendererListView = CreateNodeListView("Renderer List", AvatarNodeType.RendererNode, m_NodeBehaviour.rendererNodes, true);
+            m_RendererListView.showAddRemoveFooter = false;
             m_RootView.Add(m_RendererListView);
+
+            var rendererRefreshButton = new Button();
+            rendererRefreshButton.text = "Refresh Renderers";
+            rendererRefreshButton.clicked += () =>
+            {
+                AvatarCreatorUtil.RefreshRendererNodes(m_NodeBehaviour);
+                m_RendererListView.Rebuild();
+            };
+            m_RootView.Add(rendererRefreshButton);
 
             return m_RootView;
         }

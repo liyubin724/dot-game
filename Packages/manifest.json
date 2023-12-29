@@ -7,6 +7,7 @@
     "com.dot.gopool": "file:D:/WorkSpace/dot-libs/dot-gameobjectpool/Assets/Dot.GameObjectPool",
     "com.dot.injection": "file:D:/WorkSpace/dot-libs/dot-injection/Assets/Dot.Injection",
     "com.dot.log": "file:D:/WorkSpace/dot-libs/dot-log/Assets/Dot.Log",
+    "com.dot.nativedrawer": "file:D:/WorkSpace/dot-libs/dot-nativedrawer/Assets/Dot.NativeDrawer",
     "com.dot.timer": "file:D:/WorkSpace/dot-libs/dot-timer/Assets/Dot.Timer",
     "com.dot.uiframe": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.UIFrame",
     "com.unity.collab-proxy": "2.0.0",

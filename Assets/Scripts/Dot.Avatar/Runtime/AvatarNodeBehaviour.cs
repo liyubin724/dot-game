@@ -7,6 +7,7 @@ namespace DotEngine.Avatar
     public enum AvatarNodeType
     {
         None = 0,
+
         BindNode,
         BoneNode,
         RendererNode,

@@ -4,7 +4,7 @@
     "com.dot.command": "file:../../dot-command/Assets/Dot.Command",
     "com.dot.core": "file:../../dot-core/Assets/Dot.Core",
     "com.dot.events": "file:../../dot-events/Assets/Dot.Events",
-    "com.dot.gameplay": "file:../../dot-framework/Assets/Dot.GamePlay",
+    "com.dot.fw": "file:../../dot-framework/Assets/Dot.FW",
     "com.dot.gopool": "file:../../dot-gameobjectpool/Assets/Dot.GOPool",
     "com.dot.graph": "file:../../dot-graph/Assets/Dot.Graph",
     "com.dot.injection": "file:../../dot-injection/Assets/Dot.Injection",

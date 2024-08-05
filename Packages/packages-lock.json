@@ -33,8 +33,8 @@
       "source": "local",
       "dependencies": {}
     },
-    "com.dot.gameplay": {
-      "version": "file:../../dot-framework/Assets/Dot.GamePlay",
+    "com.dot.fw": {
+      "version": "file:../../dot-framework/Assets/Dot.FW",
       "depth": 0,
       "source": "local",
       "dependencies": {}

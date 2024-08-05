@@ -1,70 +1,109 @@
 {
   "dependencies": {
-    "com.dot.bl": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-behaviourline/Assets/Dot.BehaviourLine",
+    "com.autodesk.fbx": {
+      "version": "4.2.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.dot.bmf": {
+      "version": "file:../../dot-bmf/Assets/Dot.BMF",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.command": {
+      "version": "file:../../dot-command/Assets/Dot.Command",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.dot.core": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-core/Assets/Dot.Core",
+      "version": "file:../../dot-core/Assets/Dot.Core",
       "depth": 0,
       "source": "local",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      }
     },
     "com.dot.events": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-events/Assets/Dot.Events",
+      "version": "file:../../dot-events/Assets/Dot.Events",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
-    "com.dot.frame": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.Frame",
+    "com.dot.gameplay": {
+      "version": "file:../../dot-framework/Assets/Dot.GamePlay",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.dot.gopool": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-gameobjectpool/Assets/Dot.GameObjectPool",
+      "version": "file:../../dot-gameobjectpool/Assets/Dot.GOPool",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.dot.graph": {
+      "version": "file:../../dot-graph/Assets/Dot.Graph",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.dot.injection": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-injection/Assets/Dot.Injection",
+      "version": "file:../../dot-injection/Assets/Dot.Injection",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.dot.log": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-log/Assets/Dot.Log",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
-    "com.dot.nativedrawer": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-nativedrawer/Assets/Dot.NativeDrawer",
+      "version": "file:../../dot-log/Assets/Dot.Log",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
     "com.dot.timer": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-timer/Assets/Dot.Timer",
+      "version": "file:../../dot-timer/Assets/Dot.Timer",
       "depth": 0,
       "source": "local",
       "dependencies": {}
     },
-    "com.dot.uiframe": {
-      "version": "file:D:/WorkSpace/dot-libs/dot-framework/Assets/Dot.UIFrame",
+    "com.dot.ui": {
+      "version": "file:../../dot-ui/Assets/Dot.UI",
       "depth": 0,
       "source": "local",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      }
     },
-    "com.unity.collab-proxy": {
-      "version": "2.0.0",
-      "depth": 0,
+    "com.unity.animation.rigging": {
+      "version": "1.2.1",
+      "depth": 1,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.burst": "1.4.1",
+        "com.unity.test-framework": "1.1.24"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.burst": {
+      "version": "1.8.16",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "2.10.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.editorcoroutines": {
@@ -75,27 +114,49 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
-      "version": "2.0.3",
+      "version": "1.0.6",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.feature.development": {
-      "version": "1.0.2",
+    "com.unity.feature.characters-animation": {
+      "version": "1.0.0",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.ide.visualstudio": "2.0.16",
-        "com.unity.ide.rider": "3.0.16",
-        "com.unity.editorcoroutines": "1.0.0",
-        "com.unity.performance.profile-analyzer": "1.1.1",
-        "com.unity.test-framework": "1.3.0",
-        "com.unity.testtools.codecoverage": "1.2.1"
+        "com.unity.animation.rigging": "1.2.1",
+        "com.unity.timeline": "1.7.6",
+        "com.unity.cinemachine": "2.10.0",
+        "com.unity.formats.fbx": "4.2.1"
       }
     },
+    "com.unity.feature.development": {
+      "version": "1.0.1",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ide.visualstudio": "2.0.22",
+        "com.unity.ide.rider": "3.0.28",
+        "com.unity.ide.vscode": "1.2.5",
+        "com.unity.editorcoroutines": "1.0.0",
+        "com.unity.performance.profile-analyzer": "1.2.2",
+        "com.unity.test-framework": "1.1.33",
+        "com.unity.testtools.codecoverage": "1.2.5"
+      }
+    },
+    "com.unity.formats.fbx": {
+      "version": "4.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.7.1",
+        "com.autodesk.fbx": "4.2.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ide.rider": {
-      "version": "3.0.16",
+      "version": "3.0.28",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -104,7 +165,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.16",
+      "version": "2.0.22",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -112,8 +173,29 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.ide.vscode": {
+      "version": "1.2.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mathematics": {
+      "version": "1.2.6",
+      "depth": 3,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.performance.profile-analyzer": {
-      "version": "1.1.1",
+      "version": "1.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -127,18 +209,18 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.3.0",
+      "version": "1.1.33",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.ext.nunit": "2.0.3",
+        "com.unity.ext.nunit": "1.0.6",
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
-      "version": "1.2.1",
+      "version": "1.2.5",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -147,18 +229,9 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.textmeshpro": {
-      "version": "3.0.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.timeline": {
-      "version": "1.8.0",
-      "depth": 0,
+      "version": "1.7.6",
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.director": "1.0.0",
@@ -176,16 +249,6 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
-    },
-    "com.unity.visualscripting": {
-      "version": "1.8.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

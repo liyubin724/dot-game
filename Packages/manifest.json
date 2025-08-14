@@ -1,10 +1,8 @@
 {
   "dependencies": {
-    "com.dot.bmf": "file:../../dot-bmf/Assets/Dot.BMF",
     "com.dot.command": "file:../../dot-command/Assets/Dot.Command",
     "com.dot.core": "file:../../dot-core/Assets/Dot.Core",
     "com.dot.events": "file:../../dot-events/Assets/Dot.Events",
-    "com.dot.fw": "file:../../dot-framework/Assets/Dot.FW",
     "com.dot.gopool": "file:../../dot-gameobjectpool/Assets/Dot.GOPool",
     "com.dot.graph": "file:../../dot-graph/Assets/Dot.Graph",
     "com.dot.injection": "file:../../dot-injection/Assets/Dot.Injection",
@@ -12,6 +10,7 @@
     "com.dot.timer": "file:../../dot-timer/Assets/Dot.Timer",
     "com.dot.ui": "file:../../dot-ui/Assets/Dot.UI",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.device-simulator.devices": "1.0.0",
     "com.unity.feature.characters-animation": "1.0.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.ugui": "1.0.0",
